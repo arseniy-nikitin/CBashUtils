@@ -13,7 +13,11 @@ rebuild:
 	make clean
 	make s21_grep
 
-style:
+style-replace:
+	clang-format --style=Google *.c *.h -i
+	clang-format --style=Google ../common/*.c ../common/*.h -i
+
+style-check:
 	clang-format --style=Google *.c *.h -n
 	clang-format --style=Google ../common/*.c ../common/*.h -n
 
