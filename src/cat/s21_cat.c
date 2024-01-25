@@ -80,9 +80,12 @@ void cook_cat(int argc, char** argv, int optind, flags flag_state) {
         }
         putchar(ch);
       }
-    } else
+    } else {
       fprintf(stderr, "s21_cat: %s: No such file or directory\n", argv[optind]);
-    fclose(fp);
+    }
+    if (fp != NULL) {
+      fclose(fp);
+    }
     optind++;
   }
   fp = NULL;
@@ -97,7 +100,9 @@ void raw_cat(int argc, char** argv, int optind) {
       while ((ch = fgetc(fp)) != EOF) putchar(ch);
     } else
       fprintf(stderr, "s21_cat: %s: No such file or directory\n", argv[optind]);
-    fclose(fp);
+    if (fp != NULL) {
+      fclose(fp);
+    }
     optind++;
   }
   fp = NULL;

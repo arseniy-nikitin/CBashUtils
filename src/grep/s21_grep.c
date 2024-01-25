@@ -27,7 +27,9 @@ int main(int argc, char** argv) {
         } else
           fprintf(stderr, "s21_grep: %s: No such file or directory\n",
                   argv[optind]);
-        fclose(fp);
+        if (fp != NULL) {
+          fclose(fp);
+        }
         optind++;
       }
     } else
