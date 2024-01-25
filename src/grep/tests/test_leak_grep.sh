@@ -45,7 +45,7 @@ declare -a extra=(
 testing()
 {
     t=$(echo $@ | sed "s/VAR/$var/")
-    leaks -quiet -atExit -- ./s21_grep $t > test_s21_grep.log
+    leaks -quiet -atExit -- ../s21_grep $t > test_s21_grep.log
     leak=$(grep -A100000 leaks test_s21_grep.log)
     (( COUNTER++ ))
     if [[ $leak == *"0 leaks for 0 total leaked bytes"* ]]

@@ -11,9 +11,16 @@ rebuild:
 	make clean
 	make s21_cat
 
-style:
-	clang-format -n *.c *.h
+style-replace:
+	clang-format --style=Google *.c *.h -i
 
-test:
-	sh test_func_cat.sh
-	sh test_leak_cat.sh
+style-check:
+	clang-format --style=Google *.c *.h -n
+
+tests:
+	cd tests && sh test_func_cat.sh
+
+leaks:
+	cd tests && sh test_leak_cat.sh
+
+.PHONY: s21_cat tests
