@@ -1,30 +1,27 @@
 #include "s21_cat.h"
 
 int main(int argc, char** argv) {
-  if (argc > 1) {
-    flags_state flags = {0};
-    int actual_flag = 0;
-    const char* short_flags = "+nbstTeEv";
-    const struct option long_flags[] = {
-        {"number", no_argument, NULL, 'n'},
-        {"number-nonblank", no_argument, NULL, 'b'},
-        {"squeeze-blank", no_argument, NULL, 's'},
-        {NULL, 0, NULL, 0}};
-    while (actual_flag != -1) {
-      actual_flag = getopt_long(argc, argv, short_flags, long_flags, NULL);
-      parse_flags(&flags, actual_flag);
-    }
-    if (!flags.err && optind != argc) {
-      if (flags.n || flags.b || flags.s || flags.t || flags.e || flags.v) {
-        cook_cat(argc, argv, optind, flags);
-      } else {
-        raw_cat(argc, argv, optind);
-      }
+  if (argc < 2) return 0;
+  flags_state flags = {0};
+  int actual_flag = 0;
+  const char* short_flags = "+nbstTeEv";
+  const struct option long_flags[] = {
+      {"number", no_argument, NULL, 'n'},
+      {"number-nonblank", no_argument, NULL, 'b'},
+      {"squeeze-blank", no_argument, NULL, 's'},
+      {NULL, 0, NULL, 0}};
+  while (actual_flag != -1) {
+    actual_flag = getopt_long(argc, argv, short_flags, long_flags, NULL);
+    parse_flags(&flags, actual_flag);
+  }
+  if (!flags.err && optind != argc) {
+    if (flags.n || flags.b || flags.s || flags.t || flags.e || flags.v) {
+      cook_cat(argc, argv, optind, flags);
     } else {
-      fprintf(stderr, "usage: s21_cat [-nbstTeEv] [file ...]\n");
+      raw_cat(argc, argv, optind);
     }
   } else {
-    fprintf(stderr, "s21_cat: too few arguments");
+    fprintf(stderr, "usage: s21_cat [-nbstTeEv] [file ...]\n");
   }
   return 0;
 }

@@ -7,14 +7,13 @@ RESULT=0
 DIFF_RES=""
 
 declare -a tests=(
-"s test_text_grep.txt VAR"
-"for s21_grep.c s21_grep.h Makefile VAR"
-"for s21_grep.c VAR"
-"-e for -e ^int s21_grep.c s21_grep.h Makefile VAR"
-"-e for -e ^int s21_grep.c VAR"
-"-e regex -e ^print s21_grep.c VAR -f test_ptrn_grep.txt"
-"-e while -e void s21_grep.c Makefile VAR -f test_ptrn_grep.txt"
-"VAR no_file.txt"
+"s test_0_grep.txt VAR"
+"for test_2_grep.txt test_5_grep.txt test_1_grep.txt VAR"
+"for test_2_grep.txt VAR"
+"-e for -e ^int test_2_grep.txt test_5_grep.txt test_1_grep.txt VAR"
+"-e for -e ^int test_2_grep.txt VAR"
+"-e regex -e ^print test_2_grep.txt VAR -f test_ptrn_grep.txt"
+"-e while -e void test_2_grep.txt test_1_grep.txt VAR -f test_ptrn_grep.txt"
 )
 
 declare -a extra=(
